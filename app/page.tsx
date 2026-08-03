@@ -6,7 +6,7 @@ import { VideoCard } from "../components/VideoCard";
 import { sampleTrends, sampleVideos } from "../lib/sample-data";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"all" | "x" | "youtube" | "tiktok">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "X" | "YouTube" | "TikTok">("all");
 
   const filteredTrends = activeTab === "all" 
     ? sampleTrends 
@@ -26,12 +26,12 @@ export default function Home() {
           X · YouTube · TikTok 핫이슈 리서치 + 영상 분석 정리
         </p>
         <p className="text-sm text-gray-400 mt-1">
-          2026.08 기준 샘플 데이터 (실제 API 연동 시 실시간으로 변경됩니다)
+          2026.08 기준 샘플 데이터
         </p>
       </header>
 
       <div className="flex gap-2 mb-8 flex-wrap">
-        {(["all", "x", "youtube", "tiktok"] as const).map((tab) => (
+        {(["all", "X", "YouTube", "TikTok"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -41,7 +41,7 @@ export default function Home() {
                 : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
             }`}
           >
-            {tab === "all" ? "전체" : tab === "x" ? "X" : tab === "youtube" ? "YouTube" : "TikTok"}
+            {tab === "all" ? "전체" : tab}
           </button>
         ))}
       </div>
@@ -65,7 +65,7 @@ export default function Home() {
       </section>
 
       <footer className="mt-16 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
-        <p>MVP 버전 · API 키를 추가하면 실시간 데이터로 전환됩니다</p>
+        <p>MVP 버전</p>
         <p className="mt-1">GitHub: aljjang95/sns-hot-issue-analyzer</p>
       </footer>
     </main>

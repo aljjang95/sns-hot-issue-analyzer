@@ -2,22 +2,16 @@ import { Trend } from "../lib/sample-data";
 
 export function TrendCard({ trend }: { trend: Trend }) {
   const platformColor: Record<string, string> = {
-    x: "bg-black text-white",
-    youtube: "bg-red-600 text-white",
-    tiktok: "bg-gray-900 text-white",
-  };
-
-  const platformLabel: Record<string, string> = {
-    x: "X",
-    youtube: "YouTube",
-    tiktok: "TikTok",
+    X: "bg-black text-white",
+    YouTube: "bg-red-600 text-white",
+    TikTok: "bg-gray-900 text-white",
   };
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition">
       <div className="flex items-start justify-between mb-3">
         <span className={`text-xs font-medium px-2 py-1 rounded-full ${platformColor[trend.platform] || "bg-gray-800 text-white"}`}>
-          {platformLabel[trend.platform] || trend.platform}
+          {trend.platform}
         </span>
         {(trend.engagement || trend.score !== undefined) && (
           <span className="text-xs text-gray-400">{trend.engagement || `점수 ${trend.score}`}</span>
