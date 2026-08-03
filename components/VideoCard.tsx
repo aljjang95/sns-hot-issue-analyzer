@@ -1,31 +1,23 @@
 import { VideoAnalysis } from "../lib/sample-data";
 
 export function VideoCard({ video }: { video: VideoAnalysis }) {
-  const platformLabel = {
-    x: "X",
-    youtube: "YouTube",
-    tiktok: "TikTok",
+  const platformColor = {
+    X: "bg-black text-white",
+    YouTube: "bg-red-600 text-white",
+    TikTok: "bg-gray-900 text-white",
   }[video.platform];
-
-  const sentimentColor = {
-    positive: "text-green-600 bg-green-50",
-    neutral: "text-gray-600 bg-gray-50",
-    mixed: "text-yellow-600 bg-yellow-50",
-  }[video.sentiment];
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
       <div className="p-5">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-medium px-2 py-1 rounded-full bg-gray-900 text-white">
-            {platformLabel}
+          <span className={`text-xs font-medium px-2 py-1 rounded-full ${platformColor}`}>
+            {video.platform}
           </span>
-          <span className={`text-xs font-medium px-2 py-1 rounded-full ${sentimentColor}`}>
-            {video.sentiment === "positive" ? "긍정" : video.sentiment === "neutral" ? "중립" : "혼합"}
-          </span>
+          <span className="text-xs text-gray-500">{video.tone}</span>
         </div>
         <h3 className="font-semibold text-gray-900 mb-1">{video.title}</h3>
-        <p className="text-xs text-gray-400 mb-4">길이: {video.duration}</p>
+        <p className="text-xs text-gray-400 mb-4">관련: {video.relatedTrend}</p>
 
         <div className="mb-4">
           <p className="text-xs font-medium text-gray-500 mb-2">핵심 포인트</p>
@@ -44,16 +36,14 @@ export function VideoCard({ video }: { video: VideoAnalysis }) {
           <p className="text-sm text-gray-800">{video.summary}</p>
         </div>
 
-        {video.url !== "#" && (
-          <a
-            href={video.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 text-sm font-medium text-blue-600 hover:underline"
-          >
-            원본 보기 →
-          </a>
-        )}
+        <a
+          href={video.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 text-sm font-medium text-blue-600 hover:underline"
+        >
+          원본 보기 →
+        </a>
       </div>
     </div>
   );
