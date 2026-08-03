@@ -6,7 +6,7 @@ import { VideoCard } from "../components/VideoCard";
 import { sampleTrends, sampleVideos } from "../lib/sample-data";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"all" | "X" | "YouTube" | "TikTok">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "x" | "youtube" | "tiktok">("all");
 
   const filteredTrends = activeTab === "all" 
     ? sampleTrends 
@@ -31,7 +31,7 @@ export default function Home() {
       </header>
 
       <div className="flex gap-2 mb-8 flex-wrap">
-        {(["all", "X", "YouTube", "TikTok"] as const).map((tab) => (
+        {(["all", "x", "youtube", "tiktok"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -41,7 +41,7 @@ export default function Home() {
                 : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
             }`}
           >
-            {tab === "all" ? "전체" : tab}
+            {tab === "all" ? "전체" : tab === "x" ? "X" : tab === "youtube" ? "YouTube" : "TikTok"}
           </button>
         ))}
       </div>

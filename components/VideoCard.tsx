@@ -1,23 +1,34 @@
 import { VideoAnalysis } from "../lib/sample-data";
 
 export function VideoCard({ video }: { video: VideoAnalysis }) {
-  const platformColor = {
-    X: "bg-black text-white",
-    YouTube: "bg-red-600 text-white",
-    TikTok: "bg-gray-900 text-white",
-  }[video.platform];
+  const platformColor: Record<string, string> = {
+    x: "bg-black text-white",
+    youtube: "bg-red-600 text-white",
+    tiktok: "bg-gray-900 text-white",
+  };
+
+  const platformLabel: Record<string, string> = {
+    x: "X",
+    youtube: "YouTube",
+    tiktok: "TikTok",
+  };
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
       <div className="p-5">
         <div className="flex items-center justify-between mb-3">
-          <span className={`text-xs font-medium px-2 py-1 rounded-full ${platformColor}`}>
-            {video.platform}
+          <span className={`text-xs font-medium px-2 py-1 rounded-full ${platformColor[video.platform] || "bg-gray-800 text-white"}`}>
+            {platformLabel[video.platform] || video.platform}
           </span>
-          <span className="text-xs text-gray-500">{video.tone}</span>
+          {video.tone && <span className="text-xs text-gray-500">{video.tone}</span>}
         </div>
         <h3 className="font-semibold text-gray-900 mb-1">{video.title}</h3>
-        <p className="text-xs text-gray-400 mb-4">관련: {video.relatedTrend}</p>
+        {video.relatedTrend && (
+          <p className="text-xs text-gray-400 mb-2">관련: {video.relatedTrend}</p>
+        )}
+        {video.duration && (
+          <p className="text-xs text-gray-400 mb-4">길이: {video.duration}</p>
+        )}
 
         <div className="mb-4">
           <p className="text-xs font-medium text-gray-500 mb-2">핵심 포인트</p>
