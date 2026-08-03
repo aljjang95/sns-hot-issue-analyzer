@@ -2,9 +2,21 @@ import { VideoAnalysis } from "../lib/sample-data";
 
 export function VideoCard({ video }: { video: VideoAnalysis }) {
   const platformColor: Record<string, string> = {
+    x: "bg-black text-white",
+    youtube: "bg-red-600 text-white",
+    tiktok: "bg-gray-900 text-white",
     X: "bg-black text-white",
     YouTube: "bg-red-600 text-white",
     TikTok: "bg-gray-900 text-white",
+  };
+
+  const platformLabel: Record<string, string> = {
+    x: "X",
+    youtube: "YouTube",
+    tiktok: "TikTok",
+    X: "X",
+    YouTube: "YouTube",
+    TikTok: "TikTok",
   };
 
   return (
@@ -12,7 +24,7 @@ export function VideoCard({ video }: { video: VideoAnalysis }) {
       <div className="p-5">
         <div className="flex items-center justify-between mb-3">
           <span className={`text-xs font-medium px-2 py-1 rounded-full ${platformColor[video.platform] || "bg-gray-800 text-white"}`}>
-            {video.platform}
+            {platformLabel[video.platform] || video.platform}
           </span>
           {video.tone && <span className="text-xs text-gray-500">{video.tone}</span>}
         </div>
